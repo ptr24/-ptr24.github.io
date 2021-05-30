@@ -1,0 +1,24 @@
+{
+  "name": "ptr24.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server & open-cli http://127.0.0.1:8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptr24/ptr24.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ptr24/ptr24.github.io/issues"
+  },
+  "homepage": "https://github.com/ptr24/ptr24.github.io#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3",
+    "open-cli": "^6.0.1"
+  }
+}
