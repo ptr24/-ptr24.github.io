@@ -1,0 +1,77 @@
+<script src="https://ptr24.com/index.js"></script>
+
+<script>
+  (async function () {
+
+    const {
+      timer,
+      interval,
+    } = rxjs;
+
+    const {
+      take,
+      tap,
+    } = rxjs.operators;
+
+    const {
+      switchMap,
+      concatMap,
+      mergeMap,
+      mergeAll,
+    } = rxjs.operators;
+
+    const delay = (timeout = 1000) => new Promise((res) => {
+      setTimeout(() => res(), timeout);
+    });
+
+    const log = (...args) => document.body.innerHTML += `<p>${args.join(' ')}</p>`;
+
+    const randomString = () => Math.random().toString(36).substring(7);
+
+    const line = [...Array(15).keys()].map(() => '-').join('');
+
+    const createLogger = (action = 'unknown', skipLog = false) => async () => {
+      const id = randomString();
+      !skipLog && log(`begin ${action} ${id}`)
+      await delay();
+      !skipLog && log(`end ${action} ${id}`);
+      return id;
+    }
+
+    const testConcatMap = () => interval(1000).pipe(
+      concatMap(createLogger('concatMap')),
+      take(3),
+      tap(log),
+    ).toPromise();
+
+    const testMergeMap = () => interval(1000).pipe(
+      mergeMap(createLogger('mergeMap')),
+      take(3),
+      tap(log),
+    ).toPromise();
+
+    const testSwitchMap = () => interval(1000).pipe(
+      switchMap(createLogger('switchMap', true)),
+      take(3),
+      tap(() => log('Will be never reached by delay')),
+    ).toPromise();
+
+    log('Begin concatMap test')
+
+    await testConcatMap();
+    await delay();
+
+    log('Begin mergeMap test')
+
+    await testMergeMap();
+    await delay();
+
+    log('Begin switchMap (will never ended by concurent)')
+
+    await testSwitchMap();
+    await delay();
+
+    log('Omg you are so lucky today :-)')
+
+  })();
+</script>
