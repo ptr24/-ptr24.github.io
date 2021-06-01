@@ -27,6 +27,6 @@
   window.idb || document.write(template("3rdparty/material-ui-umd@1.1/idb-tools.js"));
   window.chart || document.write(template("3rdparty/material-ui-umd@1.1/chart-tools.js"));
 
-  window.rxjs || document.write(template("3rdparty/rxjs@6.6.7/rxjs.umd.min.js"));
+  window.rxjs || document.write(template("3rdparty/rxjs@6.1.0/rxjs.umd.js"));
 
 })();
